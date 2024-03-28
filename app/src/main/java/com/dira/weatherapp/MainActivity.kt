@@ -1,4 +1,4 @@
-package com.dira.weatherapp
+    package com.dira.weatherapp
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
