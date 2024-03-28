@@ -13,15 +13,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// @HiltViewModel: Ini adalah anotasi yang menandakan bahwa kelas HomeViewModel adalah ViewModel yang akan diinjeksikan oleh Hilt. Ketika Anda menggunakan @HiltViewModel, Anda tidak perlu lagi menyediakan ViewModelProvider.Factory karena Hilt secara otomatis akan menangani pembuatan instance ViewModel dan menyediakan dependencies yang diperlukan ke dalam konstruktor ViewModel.
+
+// @Inject: Ini adalah anotasi yang menandai konstruktor kelas HomeViewModel. Hilt akan memastikan bahwa instance dari CurrentWeatherRemote akan disediakan dan disuntikkan ke dalam konstruktor HomeViewModel saat membuat instance ViewModel.
+
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val currentWeatherRemote: CurrentWeatherRemote) :
+class CurrentWeatherViewModel @Inject constructor(private val currentWeatherRemote: CurrentWeatherRemote) :
     ViewModel() {
+
+    // setter
     private val _currentWeather = MutableLiveData<CurrentWeatherResponseModel>()
     private val _currentWeatherError = MutableLiveData<String>()
 
-    val homeNews: LiveData<CurrentWeatherResponseModel> get() = _currentWeather
-
-    val homeNewsError: LiveData<String> get() = _currentWeatherError
+    // getter
+    val currentWeather: LiveData<CurrentWeatherResponseModel> get() = _currentWeather
+    val currentWeatherError: LiveData<String> get() = _currentWeatherError
 
     fun getCurrentWeather() = viewModelScope.launch(Dispatchers.IO) {
         currentWeatherRemote.getCurrentWeather().let {
