@@ -1,10 +1,10 @@
 ### Step
-- Tambahkan response json to data class
-- Service.kt
-- Remote data source
-- ViewModel
-- Fragment
-- Daftarkan ke modul masing-masing
+- model
+- service
+- remote
+- module
+- viewModel
+- fragment
 
 ### Refference
 #### Model:
