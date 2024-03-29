@@ -6,12 +6,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleForecastHourly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:itemCount="5"
         android:orientation="horizontal"
         tools:listitem="@layout/item_forecast_hourly"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

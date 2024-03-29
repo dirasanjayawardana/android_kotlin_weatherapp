@@ -10,10 +10,10 @@ data class ForecastHourlyResponseModel(
     @SerializedName("cnt")
     val cnt: Int,
     @SerializedName("list")
-    val weatherList: List<WeatherData>
+    val forecastDataList: List<ForecastDataHourly>
 )
 
-data class WeatherData(
+data class ForecastDataHourly(
     @SerializedName("dt")
     val dt: Long,
     @SerializedName("main")
