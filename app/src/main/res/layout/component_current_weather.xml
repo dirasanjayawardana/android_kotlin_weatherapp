@@ -6,12 +6,14 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/currentImageWeather"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="70dp"
-        android:src="@drawable/cloudy"
+        android:scaleType="centerCrop"
+        android:src="@drawable/weather01d"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/currentTemp"
@@ -28,13 +30,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/currentTemp"
+        android:layout_marginStart="8dp"
+        android:text="C"
+        android:textColor="@color/text"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="@id/currentTemp"
         app:layout_constraintStart_toEndOf="@id/currentTemp"
-        android:text="C"
-        android:layout_marginStart="8dp"
-        android:textSize="32sp"
-        android:textColor="@color/text"/>
+        app:layout_constraintTop_toTopOf="@id/currentTemp" />
 
     <TextView
         android:id="@+id/currentCity"
@@ -53,7 +55,7 @@
         android:layout_width="4dp"
         android:layout_height="40dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="36dp"
         android:background="@color/card1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/currentCity" />
@@ -95,8 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:text="Pa"
-                android:textSize="20sp"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -148,8 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:text="km/h"
-                android:textSize="20sp"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -199,8 +201,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:text="%"
-                android:textSize="24sp"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -233,6 +235,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/currentFeelsLike"
                 android:layout_width="wrap_content"
@@ -242,13 +245,14 @@
                 android:textColor="@color/text"
                 android:textSize="32sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:text="C"
-                android:textSize="20sp"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -3,17 +3,35 @@ package com.dira.weatherapp.presentation.home_screen.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dira.weatherapp.data.model.ForecastDataHourly
 import com.dira.weatherapp.data.model.ForecastHourlyResponseModel
 import com.dira.weatherapp.databinding.ItemForecastHourlyBinding
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ForecastHourlyAdapter(private val data: List<ForecastDataHourly>):
     RecyclerView.Adapter<ForecastHourlyAdapter.ForecastHourlyViewHolder>() {
 
-    inner class ForecastHourlyViewHolder(val binding: ItemForecastHourlyBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ForecastHourlyViewHolder(val binding: ItemForecastHourlyBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ForecastDataHourly) {
-            binding.forecastTime.text = data.dt.toString()
+            val forecastTime = convertUnixTimeToDate(data.dt)
+            val formattedTime = SimpleDateFormat("HH:mm").format(forecastTime) // format : dd/MM/yyyy HH:mm
+
+            binding.forecastTime.text = formattedTime
             binding.forecastTemp.text = data.main.temp.toString()
+
+            // load image dengan glide
+            val imageCode = data.weather[0].icon
+            Glide.with(binding.root.context)
+                .load("https://openweathermap.org/img/wn/$imageCode@2x.png?")
+                .override(160, 80)
+                .centerCrop()
+                .into(binding.forecastImage)
+        }
+
+        private fun convertUnixTimeToDate(unixTime: Long): Date {
+            return Date(unixTime * 1000)
         }
     }
 
