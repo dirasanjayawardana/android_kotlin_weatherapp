@@ -29,8 +29,8 @@ class CurrentWeatherViewModel @Inject constructor(private val currentWeatherRemo
     val currentWeather: LiveData<CurrentWeatherResponseModel> get() = _currentWeather
     val currentWeatherError: LiveData<String> get() = _currentWeatherError
 
-    fun getCurrentWeather() = viewModelScope.launch(Dispatchers.IO) {
-        currentWeatherRemote.getCurrentWeather().let {
+    fun getCurrentWeather(lat: String, lon: String) = viewModelScope.launch(Dispatchers.IO) {
+        currentWeatherRemote.getCurrentWeather(lat, lon).let {
             if (it.isSuccessful) {
                 _currentWeather.postValue(it.body())
             } else {

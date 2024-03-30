@@ -24,8 +24,8 @@ class ForecastHourlyViewModel @Inject constructor(private val forecastHourlyRemo
     val forecastHourly: LiveData<ForecastHourlyResponseModel> get() = _forecastHourly
     val forecastHourlyError: LiveData<String> get() = _forecastHourlyError
 
-    fun getForecastHourly() = viewModelScope.launch(Dispatchers.IO) {
-        forecastHourlyRemote.getForecastHourly().let{
+    fun getForecastHourly(lat: String, lon: String) = viewModelScope.launch(Dispatchers.IO) {
+        forecastHourlyRemote.getForecastHourly(lat, lon).let{
             if (it.isSuccessful) {
                 _forecastHourly.postValue(it.body())
             } else {

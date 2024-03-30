@@ -14,11 +14,19 @@ import com.dira.weatherapp.presentation.home_screen.view_model.ForecastHourlyVie
 import com.dira.weatherapp.util.BaseFragment
 import com.dira.weatherapp.util.HorizontalItemDecoration
 import com.dira.weatherapp.data.model.current_weather.CurrentWeatherResponseModel
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
+import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
 
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val viewModelCurrentWeather: CurrentWeatherViewModel by viewModels()
     private val viewModelForecastHourly: ForecastHourlyViewModel by viewModels()
 
@@ -35,10 +43,46 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
     }
 
     override fun setupView() {
-        viewModelCurrentWeather.getCurrentWeather()
-        viewModelForecastHourly.getForecastHourly()
+        // Initialize fused location client
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        // Check for location permission
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request location permission if not granted
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
+                1
+            )
+            return
+        }
+
+        // Get last location
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                // Got last known location. In some rare situations, this can be null.
+                location?.let {
+                    val latitude = it.latitude.toString()
+                    val longitude = it.longitude.toString()
+                    // use latitude and longitude in your API calls
+                    viewModelCurrentWeather.getCurrentWeather(latitude, longitude)
+                    viewModelForecastHourly.getForecastHourly(latitude, longitude)
+                }
+            }
+
         observeViewModel()
     }
+
 
     private fun observeViewModel() {
         viewModelCurrentWeather.currentWeather.observe(viewLifecycleOwner) {it ->
