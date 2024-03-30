@@ -1,20 +1,19 @@
 package com.dira.weatherapp.presentation.home_screen.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.dira.weatherapp.R
-import com.dira.weatherapp.data.model.ForecastDataHourly
+import com.dira.weatherapp.data.model.forecast_hourly.ForecastDataHourly
 import com.dira.weatherapp.databinding.FragmentCurrentWeatherBinding
 import com.dira.weatherapp.presentation.home_screen.adapter.ForecastHourlyAdapter
 import com.dira.weatherapp.presentation.home_screen.view_model.CurrentWeatherViewModel
 import com.dira.weatherapp.presentation.home_screen.view_model.ForecastHourlyViewModel
 import com.dira.weatherapp.util.BaseFragment
 import com.dira.weatherapp.util.HorizontalItemDecoration
-import com.fazztrack.bcasyariah.data.model.CurrentWeatherResponseModel
+import com.dira.weatherapp.data.model.current_weather.CurrentWeatherResponseModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

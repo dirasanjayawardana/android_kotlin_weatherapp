@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dira.weatherapp.data.remote.CurrentWeatherRemote
-import com.fazztrack.bcasyariah.data.model.CurrentWeatherResponseModel
+import com.dira.weatherapp.data.model.current_weather.CurrentWeatherResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

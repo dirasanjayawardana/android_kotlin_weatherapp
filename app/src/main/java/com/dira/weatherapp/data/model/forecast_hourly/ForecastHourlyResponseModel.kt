@@ -1,4 +1,4 @@
-package com.dira.weatherapp.data.model
+package com.dira.weatherapp.data.model.forecast_hourly
 
 import com.google.gson.annotations.SerializedName
 

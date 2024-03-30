@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dira.weatherapp.data.model.ForecastHourlyResponseModel
+import com.dira.weatherapp.data.model.forecast_hourly.ForecastHourlyResponseModel
 import com.dira.weatherapp.data.remote.ForecastHourlyRemote
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

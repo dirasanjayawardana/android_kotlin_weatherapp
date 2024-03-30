@@ -1,4 +1,4 @@
-package com.fazztrack.bcasyariah.data.model
+package com.dira.weatherapp.data.model.current_weather
 
 import com.google.gson.annotations.SerializedName
 

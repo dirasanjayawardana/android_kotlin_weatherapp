@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dira.weatherapp.data.model.ForecastDataHourly
-import com.dira.weatherapp.data.model.ForecastHourlyResponseModel
+import com.dira.weatherapp.data.model.forecast_hourly.ForecastDataHourly
 import com.dira.weatherapp.databinding.ItemForecastHourlyBinding
 import java.text.SimpleDateFormat
 import java.util.Date

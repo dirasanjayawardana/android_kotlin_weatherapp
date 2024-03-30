@@ -1,7 +1,7 @@
 package com.dira.weatherapp.data
 
-import com.dira.weatherapp.data.model.ForecastHourlyResponseModel
-import com.fazztrack.bcasyariah.data.model.CurrentWeatherResponseModel
+import com.dira.weatherapp.data.model.forecast_hourly.ForecastHourlyResponseModel
+import com.dira.weatherapp.data.model.current_weather.CurrentWeatherResponseModel
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -1,7 +1,7 @@
 package com.dira.weatherapp.data.remote
 
 import com.dira.weatherapp.data.WeatherService
-import com.fazztrack.bcasyariah.data.model.CurrentWeatherResponseModel
+import com.dira.weatherapp.data.model.current_weather.CurrentWeatherResponseModel
 import retrofit2.Response
 import javax.inject.Inject
 

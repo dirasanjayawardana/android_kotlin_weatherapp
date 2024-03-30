@@ -1,7 +1,7 @@
 package com.dira.weatherapp.data.remote
 
 import com.dira.weatherapp.data.WeatherService
-import com.dira.weatherapp.data.model.ForecastHourlyResponseModel
+import com.dira.weatherapp.data.model.forecast_hourly.ForecastHourlyResponseModel
 import retrofit2.Response
 import javax.inject.Inject
 
