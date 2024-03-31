@@ -118,7 +118,11 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
     private fun setUpViewForecastHourly(data: List<ForecastDataHourly>) {
         val itemClickListener = object : ForecastHourlyAdapter.OnForecastHourlyItemClickListener {
             override fun onItemClick(forecastDataHourly: ForecastDataHourly) {
-                Toast.makeText(requireContext(), "Item clicked: ${forecastDataHourly.dt.toString()}", Toast.LENGTH_SHORT).show()
+                // pindah ke fragment detail
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, DetailFragment(forecastDataHourly))
+                    .addToBackStack(null) // tambahkan backstage agar bisa kembali ke fragment sebelumnya
+                    .commit()
             }
         }
 
