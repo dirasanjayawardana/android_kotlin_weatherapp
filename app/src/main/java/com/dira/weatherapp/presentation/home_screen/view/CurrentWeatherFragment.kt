@@ -18,6 +18,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -27,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     private val viewModelCurrentWeather: CurrentWeatherViewModel by viewModels()
     private val viewModelForecastHourly: ForecastHourlyViewModel by viewModels()
 
@@ -46,6 +48,11 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
         // Initialize fused location client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
+        // Check for location permission and get last location
+        getLastKnownLocation()
+    }
+
+    private fun getLastKnownLocation() {
         // Check for location permission
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -56,39 +63,29 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             // Request location permission if not granted
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                1
-            )
             return
-        }
-
-        // Get last location
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                // Got last known location. In some rare situations, this can be null.
-                location?.let {
-                    val latitude = it.latitude.toString()
-                    val longitude = it.longitude.toString()
-                    // use latitude and longitude in your API calls
-                    viewModelCurrentWeather.getCurrentWeather(latitude, longitude)
-                    viewModelForecastHourly.getForecastHourly(latitude, longitude)
+        } else {
+            // permision alreagy granted, get last location
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    // Got last known location. In some rare situations, this can be null.
+                    location?.let {
+                        val latitude = it.latitude.toString()
+                        val longitude = it.longitude.toString()
+                        // use latitude and longitude in your API calls
+                        viewModelCurrentWeather.getCurrentWeather(latitude, longitude)
+                        viewModelForecastHourly.getForecastHourly(latitude, longitude)
+                        observeViewModel()
+                    }
                 }
-            }
-
-        observeViewModel()
+        }
     }
 
-
+    // mengambil data dari viewModel dan digunakan pada setUp view
     private fun observeViewModel() {
         viewModelCurrentWeather.currentWeather.observe(viewLifecycleOwner) {it ->
             setUpCurrentWeatherView(it)
         }
-
         viewModelForecastHourly.forecastHourly.observe(viewLifecycleOwner) {it ->
             setUpViewForecastHourly(it.forecastDataList.subList(0, 8)) // sublist untuk slice list berdasarkan index
         }

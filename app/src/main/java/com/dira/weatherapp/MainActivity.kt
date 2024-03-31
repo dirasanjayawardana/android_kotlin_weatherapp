@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         akurasi = findViewById(R.id.akurasi)
         btnFind = findViewById(R.id.btn_find)
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this@MainActivity)
-        btnFind?.setOnClickListener(View.OnClickListener { v: View? -> location })
+        btnFind?.setOnClickListener(View.OnClickListener { _: View? -> location })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
