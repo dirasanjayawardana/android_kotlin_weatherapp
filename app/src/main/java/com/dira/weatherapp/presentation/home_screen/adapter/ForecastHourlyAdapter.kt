@@ -9,13 +9,18 @@ import com.dira.weatherapp.databinding.ItemForecastHourlyBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class ForecastHourlyAdapter(private val data: List<ForecastDataHourly>):
+class ForecastHourlyAdapter(
+    private val data: List<ForecastDataHourly>,
+    private val itemClickListener: OnForecastHourlyItemClickListener // menambahkan listener
+) :
     RecyclerView.Adapter<ForecastHourlyAdapter.ForecastHourlyViewHolder>() {
 
-    inner class ForecastHourlyViewHolder(val binding: ItemForecastHourlyBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ForecastHourlyViewHolder(val binding: ItemForecastHourlyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ForecastDataHourly) {
             val forecastTime = convertUnixTimeToDate(data.dt)
-            val formattedTime = SimpleDateFormat("HH:mm").format(forecastTime) // format : dd/MM/yyyy HH:mm
+            val formattedTime =
+                SimpleDateFormat("HH:mm").format(forecastTime) // format : dd/MM/yyyy HH:mm
 
             binding.forecastTime.text = formattedTime
             binding.forecastTemp.text = data.main.temp.toString()
@@ -43,6 +48,17 @@ class ForecastHourlyAdapter(private val data: List<ForecastDataHourly>):
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: ForecastHourlyViewHolder, position: Int) {
-        holder.bind(data[position])
+        val currentItem = data[position]
+
+        // menambahkan listener
+        holder.bind(currentItem)
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(currentItem)
+        }
+    }
+
+    // menambahkan listener
+    interface OnForecastHourlyItemClickListener {
+        fun onItemClick(forecastDataHourly: ForecastDataHourly)
     }
 }

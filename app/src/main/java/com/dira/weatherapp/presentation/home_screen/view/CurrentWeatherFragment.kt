@@ -18,8 +18,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.dira.weatherapp.presentation.detail_screen.view.DetailFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
@@ -114,8 +116,15 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
     }
 
     private fun setUpViewForecastHourly(data: List<ForecastDataHourly>) {
-        forecastHourlyAdapter = ForecastHourlyAdapter(data)
+        val itemClickListener = object : ForecastHourlyAdapter.OnForecastHourlyItemClickListener {
+            override fun onItemClick(forecastDataHourly: ForecastDataHourly) {
+                Toast.makeText(requireContext(), "Item clicked: ${forecastDataHourly.dt.toString()}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        forecastHourlyAdapter = ForecastHourlyAdapter(data, itemClickListener)
         binding.forecastHourly.recycleForecastHourly.adapter = forecastHourlyAdapter
+
 
         // untuk setting orientasi recycle viewnya, bisa juga secara manual edit orientation di component recycleView
         binding.forecastHourly.recycleForecastHourly.layoutManager = LinearLayoutManager(
@@ -128,4 +137,5 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
             }
         }
     }
+
 }
