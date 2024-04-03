@@ -101,6 +101,13 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
         binding.currentWeather.currentHumidity.text = data.main.humidity.toString()
         binding.currentWeather.currentFeelsLike.text = data.main.feelsLike.toString()
 
+//        binding.navbar.buttonSearch.setOnClickListener{
+//            parentFragmentManager.beginTransaction()
+//                .replace(R.id.fragmentContainer, SearchWeatherFragment())
+//                .addToBackStack(null) // tambahkan backstage agar bisa kembali ke fragment sebelumnya
+//                .commit()
+//        }
+
         // set image dengan string resource template
         // val imageName = "weather${data.weather[0].icon}"
         // val resourceId = resources.getIdentifier(imageName, "drawable", "com.dira.weatherapp")
