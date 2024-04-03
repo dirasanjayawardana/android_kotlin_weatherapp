@@ -9,8 +9,6 @@ import com.dira.weatherapp.R
 import com.dira.weatherapp.data.model.forecast_hourly.ForecastDataHourly
 import com.dira.weatherapp.databinding.FragmentCurrentWeatherBinding
 import com.dira.weatherapp.presentation.home_screen.adapter.ForecastHourlyAdapter
-import com.dira.weatherapp.presentation.home_screen.view_model.CurrentWeatherViewModel
-import com.dira.weatherapp.presentation.home_screen.view_model.ForecastHourlyViewModel
 import com.dira.weatherapp.util.BaseFragment
 import com.dira.weatherapp.util.HorizontalItemDecoration
 import com.dira.weatherapp.data.model.current_weather.CurrentWeatherResponseModel
@@ -22,6 +20,8 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.dira.weatherapp.presentation.detail_screen.view.DetailFragment
+import com.dira.weatherapp.presentation.home_screen.view_model.HomeViewModel
+import com.dira.weatherapp.presentation.search_screen.view.SearchFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,8 +31,7 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val viewModelCurrentWeather: CurrentWeatherViewModel by viewModels()
-    private val viewModelForecastHourly: ForecastHourlyViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var forecastHourlyAdapter: ForecastHourlyAdapter
 
@@ -75,8 +74,8 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
                         val latitude = it.latitude.toString()
                         val longitude = it.longitude.toString()
                         // use latitude and longitude in your API calls
-                        viewModelCurrentWeather.getCurrentWeather(latitude, longitude)
-                        viewModelForecastHourly.getForecastHourly(latitude, longitude)
+                        viewModel.getCurrentWeather(latitude, longitude)
+                        viewModel.getForecastHourly(latitude, longitude)
                         observeViewModel()
                     }
                 }
@@ -85,10 +84,10 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
 
     // mengambil data dari viewModel dan digunakan pada setUp view
     private fun observeViewModel() {
-        viewModelCurrentWeather.currentWeather.observe(viewLifecycleOwner) {it ->
+        viewModel.currentWeather.observe(viewLifecycleOwner) {it ->
             setUpCurrentWeatherView(it)
         }
-        viewModelForecastHourly.forecastHourly.observe(viewLifecycleOwner) {it ->
+        viewModel.forecastHourly.observe(viewLifecycleOwner) {it ->
             setUpViewForecastHourly(it.forecastDataList.subList(0, 8)) // sublist untuk slice list berdasarkan index
         }
     }
@@ -101,12 +100,12 @@ class CurrentWeatherFragment : BaseFragment<FragmentCurrentWeatherBinding>() {
         binding.currentWeather.currentHumidity.text = data.main.humidity.toString()
         binding.currentWeather.currentFeelsLike.text = data.main.feelsLike.toString()
 
-//        binding.navbar.buttonSearch.setOnClickListener{
-//            parentFragmentManager.beginTransaction()
-//                .replace(R.id.fragmentContainer, SearchWeatherFragment())
-//                .addToBackStack(null) // tambahkan backstage agar bisa kembali ke fragment sebelumnya
-//                .commit()
-//        }
+        binding.navbar.buttonSearch.setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, SearchFragment())
+                .addToBackStack(null) // tambahkan backstage agar bisa kembali ke fragment sebelumnya
+                .commit()
+        }
 
         // set image dengan string resource template
         // val imageName = "weather${data.weather[0].icon}"

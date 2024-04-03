@@ -9,7 +9,7 @@
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/weather01d"
+        android:src="@drawable/loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +19,7 @@
         android:id="@+id/currentTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="26,9"
+        android:text=""
         android:textColor="@color/text"
         android:textSize="60sp"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="Matraman, Jakarta Timur"
+        android:text=""
         android:textColor="@color/text"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="1000"
+                android:text=""
                 android:textColor="@color/text"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="22"
+                android:text=""
                 android:textColor="@color/text"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -191,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="65"
+                android:text=""
                 android:textColor="@color/text"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -241,7 +241,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="36,4"
+                android:text=""
                 android:textColor="@color/text"
                 android:textSize="32sp"
                 android:textStyle="bold" />

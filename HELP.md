@@ -1,4 +1,4 @@
-# Update : Add Search weather by weather
+# Update : Add Search weather by city
 
 ### Step
 - model
